@@ -48,9 +48,15 @@ checkAndRecurse::[Int] -> Bool -> Int -> [Int]
 checkAndRecurse bigList valid index
  | index==49 = bigList
  | valid == False = [0]
- | (checkAndRecurse (listToCheck) (check(listToCheck)) (index+1)) /= [0] = checkAndRecurse (listToCheck) (check(listToCheck)) (index+1)
+ | (checkAndRecurse (listToCheck 1) (check(listToCheck 1)) (index+1)) /= [0] = checkAndRecurse (listToCheck 1) (check(listToCheck 1)) (index+1)
+ | (checkAndRecurse (listToCheck 2) (check(listToCheck 2)) (index+1)) /= [0] = checkAndRecurse (listToCheck 2) (check(listToCheck 2)) (index+1)
+ | (checkAndRecurse (listToCheck 3) (check(listToCheck 3)) (index+1)) /= [0] = checkAndRecurse (listToCheck 3) (check(listToCheck 3)) (index+1)
+ | (checkAndRecurse (listToCheck 4) (check(listToCheck 4)) (index+1)) /= [0] = checkAndRecurse (listToCheck 4) (check(listToCheck 4)) (index+1)
+ | (checkAndRecurse (listToCheck 5) (check(listToCheck 5)) (index+1)) /= [0] = checkAndRecurse (listToCheck 5) (check(listToCheck 5)) (index+1)
+ | (checkAndRecurse (listToCheck 6) (check(listToCheck 6)) (index+1)) /= [0] = checkAndRecurse (listToCheck 6) (check(listToCheck 6)) (index+1)
+ | (checkAndRecurse (listToCheck 7) (check(listToCheck 7)) (index+1)) /= [0] = checkAndRecurse (listToCheck 7) (check(listToCheck 7)) (index+1)
  | otherwise = [0]
- where listToCheck = (addToList bigList index 1)
+ where listToCheck = (addToList bigList index)
 
 check::[Int] -> Bool
 check list = True
