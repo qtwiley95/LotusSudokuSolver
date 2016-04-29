@@ -20,14 +20,17 @@ cc_spiral4 = [[4,0],[10,0],[16,0],[22,0],[28,0],[41,0],[47,0]]
 cc_spiral5 = [[5,0],[11,0],[17,0],[23,0],[29,0],[35,0],[48,0]]
 cc_spiral6 = [[6,0],[12,0],[18,0],[24,0],[30,0],[36,0],[42,0]]
 
-bigList = row0++row1++row2++row3++row4++row5++row6
+myList = row0++row1++row2++row3++row4++row5++row6
 
 --checkLotus::
 
 
 --addValue::
 
-main = putStrLn $  show  bigList
+main = putStrLn $  show  myList
+
+lotusSolver::[Int] -> [Int]
+lotusSolver bigList = bigList
 
 addToList::[Int] -> Int -> Int -> [Int]
 addToList bigList index value
@@ -40,3 +43,14 @@ buildList bigList loopIndex index value
  | loopIndex==(-1) = buildList bigList 0 index value
  | loopIndex==index = value:(buildList bigList (loopIndex+1) index value)
  | otherwise = (bigList!!loopIndex):(buildList bigList (loopIndex+1) index value)
+
+checkAndRecurse::[Int] -> Bool -> Int -> [Int]
+checkAndRecurse bigList valid index
+ | index==49 = bigList
+ | valid == False = [0]
+ | checkAndRecurse(addToList bigList index 1) (check listToCheck) (index+1) = checkAndRecurse(addToList bigList index 1) (check listToCheck) (index+1)
+ | otherwise = [0]
+ where listToCheck = (addToList bigList index 1)
+
+check::[Int] -> Bool
+check bigList = True
