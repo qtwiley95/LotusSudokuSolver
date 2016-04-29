@@ -22,11 +22,6 @@ cc_spiral6 = [[6,0],[12,0],[18,0],[24,0],[30,0],[36,0],[42,0]]
 
 myList = row0++row1++row2++row3++row4++row5++row6
 
---checkLotus::
-
-
---addValue::
-
 main = putStrLn $  show  myList
 
 lotusSolver::[Int] -> [Int]
