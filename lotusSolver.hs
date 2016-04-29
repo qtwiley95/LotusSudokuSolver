@@ -28,3 +28,15 @@ bigList = row0++row1++row2++row3++row4++row5++row6
 --addValue::
 
 main = putStrLn $  show  bigList
+
+addToList::[Int] -> Int -> Int -> [Int]
+addToList bigList index value
+ |(bigList!!index)/=0 = bigList
+ |otherwise = buildList bigList (-1) index value
+ 
+buildList::[Int] -> Int -> Int -> Int -> [Int]
+buildList bigList loopIndex index value
+ | loopIndex==49 = []
+ | loopIndex==(-1) = buildList bigList 0 index value
+ | loopIndex==index = value:(buildList bigList (loopIndex+1) index value)
+ | otherwise = (bigList!!loopIndex):(buildList bigList (loopIndex+1) index value)
