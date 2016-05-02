@@ -99,8 +99,8 @@ checkCW::[Int] -> Bool
 checkCW list = (compareValues list cw_spiral0) && (compareValues list cw_spiral1) && (compareValues list cw_spiral2) && (compareValues list cw_spiral3) && (compareValues list cw_spiral4) && (compareValues list cw_spiral5) && (compareValues list cw_spiral6)
 
 --compareValues checks if the values of "list" at the indices contained in "indices" span 1 through 7.
---compareValues does NOT check if two values are equal.
 --Hence, a lotus with any zeros will return as false.
+--compareValues does NOT check if two values are equal.
 compareValues::[Int] -> [Int] -> Bool
 compareValues list indices = sort partialList == [1,2,3,4,5,6,7]
  where partialList = (list!!(indices!!0)):(list!!(indices!!1)):(list!!(indices!!2)):(list!!(indices!!3)):(list!!(indices!!4)):(list!!(indices!!5)):(list!!(indices!!6)):[]
