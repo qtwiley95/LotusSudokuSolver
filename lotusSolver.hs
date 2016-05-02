@@ -72,10 +72,18 @@ check::[Int] -> Bool
 check list = (checkRing list) && (checkCCW list) && (checkCW list)
 
 checkRing::[Int] -> Bool
-checkRing list = True
+checkRing list = (compareValues list ring0) && (compareValues list ring1) && (compareValues list ring2) && (compareValues list ring3) && (compareValues list ring4) && (compareValues list ring5) && (compareValues list ring6)
 
 checkCCW::[Int] -> Bool
-checkCCW list = True
+checkCCW list = (compareValues list ccw_spiral0) && (compareValues list ccw_spiral1) && (compareValues list ccw_spiral2) && (compareValues list ccw_spiral3) && (compareValues list ccw_spiral4) && (compareValues list ccw_spiral5) && (compareValues list ccw_spiral6)
 
 checkCW::[Int] -> Bool
-checkCW list = True
+checkCW list = (compareValues list cw_spiral0) && (compareValues list cw_spiral1) && (compareValues list cw_spiral2) && (compareValues list cw_spiral3) && (compareValues list cw_spiral4) && (compareValues list cw_spiral5) && (compareValues list cw_spiral6)
+
+compareValues::[Int] -> [Int] -> Bool
+compareValues list indices = True
+
+
+
+
+
