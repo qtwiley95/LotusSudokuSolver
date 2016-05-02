@@ -105,7 +105,9 @@ compareValues::[Int] -> [Int] -> Bool
 compareValues list indices = sort partialList == [1,2,3,4,5,6,7]
  where partialList = (list!!(indices!!0)):(list!!(indices!!1)):(list!!(indices!!2)):(list!!(indices!!3)):(list!!(indices!!4)):(list!!(indices!!5)):(list!!(indices!!6)):[]
 
-
-
+--checkPartial takes in a lotus "list" and a ring/spiral of that lotus called "partial"
+--It checks whether that partial is valid and returns that Bool
+checkPartial::[Int] -> [Int] -> Bool
+checkPartial list partial = (compareValues list partial)
 
 
