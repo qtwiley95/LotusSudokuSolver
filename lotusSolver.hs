@@ -31,8 +31,9 @@ cw_spiral4 = [46,39,33,26,20,13,0]
 cw_spiral5 = [47,40,34,27,14,7,1]
 cw_spiral6 = [48,41,28,21,15,8,2]
 
-myList = row0++row1++row2++row3++row4++row5++row6
+myList = ring0++ring1++ring2++ring3++ring4++ring5++ring6
 
+goodList::[Int]
 goodList = [5,4,7,2,1,6,3,6,5,4,3,7,2,1,7,3,6,2,1,5,4,2,1,7,5,4,6,3,1,5,4,3,6,7,2,7,6,2,1,3,5,4,3,5,4,7,2,1,6]
 
 main = putStrLn $  show  myList
