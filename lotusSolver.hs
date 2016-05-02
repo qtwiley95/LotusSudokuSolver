@@ -36,6 +36,7 @@ myList = ring0++ring1++ring2++ring3++ring4++ring5++ring6
 goodList::[Int]
 goodList = [5,4,7,2,1,6,3,6,5,4,3,7,2,1,7,3,6,2,1,5,4,2,1,7,5,4,6,3,1,5,4,3,6,7,2,7,6,2,1,3,5,4,3,5,4,7,2,1,6]
 
+
 main = putStrLn $  show  myList
 
 lotusSolver::[Int] -> [Int]
@@ -68,4 +69,13 @@ checkAndRecurse bigList valid index
  where listToCheck = (addToList bigList index)
 
 check::[Int] -> Bool
-check list = True
+check list = (checkRing list) && (checkCCW list) && (checkCW list)
+
+checkRing::[Int] -> Bool
+checkRing list = True
+
+checkCCW::[Int] -> Bool
+checkCCW list = True
+
+checkCW::[Int] -> Bool
+checkCW list = True
