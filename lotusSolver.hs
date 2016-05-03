@@ -2,7 +2,7 @@
 import Data.List.Split
 import Data.List
 
---rows of like shape, outside to inside
+--Rows of like shape, outside to inside
 row0 = [0,1,2,3,4,5,6]
 row1 = [7,8,9,10,11,12,13]
 row2 = [14,15,16,17,18,19,20]
@@ -77,20 +77,18 @@ fortyNineList a = take 49 a
 
 -----------------------------------------------------------------------------------
 --Name: lotusSolver
---Inputs: a list of ints, representing an unsolved lotus sudoku puzzle
---Outputs: a list of ints, representing a now solved lotus sudoku puzzle
---Explanation: We append a trivial element before solving, and
---			   drop that same element before returning
+--Inputs: a list of ints, representing an unsolved lotus
+--Outputs: a lis
+--Explanation:
 -----------------------------------------------------------------------------------
 lotusSolver::[Int] -> [Int]
 lotusSolver bigList = fortyNineList $ checkAndRecurse (fiftyList bigList) True 0
 
 -----------------------------------------------------------------------------------
---Name: addToList
---Inputs: a list of ints; an index int; a value int
---Outputs: a list of ints
---Explanation: The output list is identical to the input list,
---             except that "value" is placed at "index."
+--Name:
+--Inputs:
+--Outputs:
+--Explanation:
 -----------------------------------------------------------------------------------
 addToList::[Int] -> Int -> Int -> [Int]
 addToList bigList index value
@@ -98,11 +96,10 @@ addToList bigList index value
  |otherwise = ((take index bigList) ++ [value] ++ (drop (index+1) bigList))
 
 -----------------------------------------------------------------------------------
---Name: checkAndRecurse
---Inputs: a list of ints; a bool called "valid"; an int called "index
---Outputs: a list of ints 
---Explanation: the output is either a solved lotus,
---             or an empty list, meaning the lotus given was unsolvable.
+--Name:
+--Inputs:
+--Outputs:
+--Explanation:
 -----------------------------------------------------------------------------------
 checkAndRecurse::[Int] -> Bool -> Int -> [Int]
 checkAndRecurse bigList valid index
@@ -127,10 +124,13 @@ checkAndRecurse bigList valid index
        a7 = (checkAndRecurse (listToCheck 7) (check(listToCheck 7)) (index+1))
 
 -----------------------------------------------------------------------------------
---Name:
---Inputs:
---Outputs:
---Explanation:
+--Name:check
+--Inputs: list of Ints
+--Outputs: boolean
+--Explanation: using list comprehension to check every value that corresponds to the index that occurs in any of 
+--             the statically determined rows, ccws, and cws. then calls hasDuplicate on each of the returned lists made by
+--             the list comprehension methods. since we're using boolean logic, if any of the hasDuplicates return True then
+--             the whole line is true and the function returns False. otherwise they all pass and return True
 -----------------------------------------------------------------------------------
 check::[Int] -> Bool
 check a
@@ -140,10 +140,13 @@ check a
   | otherwise = True
 
 -----------------------------------------------------------------------------------
---Name:
---Inputs:
---Outputs:
---Explanation:
+--Name: hasDuplicate
+--Inputs: A list of Ints
+--Outputs: boolean 
+--Explanation: until the passed in list is empty take the head of the list and if it is not equivalent to 0 then using 
+--             elem function to check if the head of list matches any other element inside of the list or if the next 
+--             head of list matches any subsequent recursively calls until list is empty, if none matched then returns
+--             false. if any matched then return true.
 -----------------------------------------------------------------------------------
 hasDuplicate::[Int] -> Bool
 hasDuplicate [] = False
