@@ -4,110 +4,109 @@ import Data.List
 import Data.Char
 import Data.String
 
------------------------------------------------------------------------------------------------------------
---Begin static declarations
------------------------------------------------------------------------------------------------------------
-
 --Rings of like shape, outside to inside
-ring0 = [0,1,2,3,4,5,6]
-ring1 = [7,8,9,10,11,12,13]
-ring2 = [14,15,16,17,18,19,20]
-ring3 = [21,22,23,24,25,26,27]
-ring4 = [28,29,30,31,32,33,34]
-ring5 = [35,36,37,38,39,40,41]
-ring6 = [42,43,44,45,46,47,48]
+row0 = [0,1,2,3,4,5,6]
+row1 = [7,8,9,10,11,12,13]
+row2 = [14,15,16,17,18,19,20]
+row3 = [21,22,23,24,25,26,27]
+row4 = [28,29,30,31,32,33,34]
+row5 = [35,36,37,38,39,40,41]
+row6 = [42,43,44,45,46,47,48]
 
 --counter-clockwise out from the center
-ccw_spiral0 = [42,41,34,26,19,11,4]
-ccw_spiral1 = [43,35,28,27,20,12,5]
-ccw_spiral2 = [44,36,29,21,14,13,6]
-ccw_spiral3 = [45,37,30,22,15,7,0]
-ccw_spiral4 = [46,38,31,23,16,8,1]
-ccw_spiral5 = [47,39,32,24,17,9,2]
-ccw_spiral6 = [48,40,33,25,18,10,3]
+ccw0 = [42,41,34,26,19,11,4]
+ccw1 = [43,35,28,27,20,12,5]
+ccw2 = [44,36,29,21,14,13,6]
+ccw3 = [45,37,30,22,15,7,0]
+ccw4 = [46,38,31,23,16,8,1]
+ccw5 = [47,39,32,24,17,9,2]
+ccw6 = [48,40,33,25,18,10,3]
 
 --clockwise out from the center
-cw_spiral0 = [42,35,29,22,16,9,3]
-cw_spiral1 = [43,36,30,23,17,10,4]
-cw_spiral2 = [44,37,31,24,18,11,5]
-cw_spiral3 = [45,38,32,25,19,12,6]
-cw_spiral4 = [46,39,33,26,20,13,0]
-cw_spiral5 = [47,40,34,27,14,7,1]
-cw_spiral6 = [48,41,28,21,15,8,2]
+cw0 = [42,35,29,22,16,9,3]
+cw1 = [43,36,30,23,17,10,4]
+cw2 = [44,37,31,24,18,11,5]
+cw3 = [45,38,32,25,19,12,6]
+cw4 = [46,39,33,26,20,13,0]
+cw5 = [47,40,34,27,14,7,1]
+cw6 = [48,41,28,21,15,8,2]
 
---goodList is a sample given by Dain Vermaak
-goodList::[Int]
-goodList = [5,4,7,2,1,6,3,6,5,4,3,7,2,1,7,3,6,2,1,5,4,2,1,7,5,4,6,3,1,5,4,3,6,7,2,7,6,2,1,3,5,4,3,5,4,7,2,1,6]
+rows = row0 ++ row1 ++ row2 ++ row3 ++ row4 ++ row5 ++ row6
+cws = cw0 ++ cw1 ++ cw2 ++ cw3 ++ cw4 ++ cw5 ++ cw6
+ccws = ccw0 ++ ccw1 ++ ccw2 ++ ccw3 ++ ccw4 ++ ccw5 ++ ccw6
+--solved [5,4,7,2,1,6,3,6,5,4,3,7,2,1,7,3,6,2,1,5,4,2,1,7,5,4,6,3,1,5,4,3,6,7,2,7,6,2,1,3,5,4,3,5,4,7,2,1,6]
+--
+allZero = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+myList0 = [5,0,0,0,1,6,0,0,0,0,3,0,0,0,7,0,6,2,1,0,0,0,1,7,0,0,6,0,0,5,0,3,6,7,2,0,0,2,1,0,0,4,0,0,4,0,0,1,0]
+myList1 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0]
+myList2 = [4,1,2,3,6,0,0,0,0,0,0,1,0,0,0,1,7,4,0,0,2,0,0,0,0,1,0,5,3,0,0,4,0,0,0,0,7,0,0,0,0,0,0,1,2,0,0,0,0]
+myList3 = [0,1,0,7,6,0,0,4,0,0,1,0,0,0,0,0,6,0,0,5,0,0,0,0,0,0,0,5,0,0,0,0,0,2,0,2,0,0,0,0,0,0,0,4,0,0,0,0,0]
+myList4 = [4,0,5,3,0,1,7,1,7,0,0,0,0,0,0,0,6,0,0,5,2,1,2,3,0,0,0,5,6,0,7,4,0,1,3,0,0,0,0,0,0,0,1,4,0,6,0,7,0]
+myList5 = [0,1,2,0,6,0,0,0,0,7,1,0,0,0,0,0,6,0,0,0,0,1,0,0,0,0,0,0,6,0,0,0,0,2,0,2,3,0,0,6,0,0,1,4,0,0,0,0,0]
+myList6 = [0,0,0,7,6,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0]
+unSolve = [0,0,3,7,6,1,4,4,0,5,1,7,0,0,0,2,6,0,4,5,3,1,0,0,2,0,0,5,6,0,7,0,0,2,3,2,3,0,7,6,0,0,0,4,5,6,1,7,0]
+main = do
+      print  (fortyNineList (checkAndRecurse (fiftyList allZero) True 0))
+      print  (fortyNineList (checkAndRecurse (fiftyList myList0) True 0))
+      print  $ fortyNineList $ checkAndRecurse (fiftyList myList1) True 0
+      print  $ fortyNineList $ checkAndRecurse (fiftyList myList2) True 0
+      print  $ fortyNineList $ checkAndRecurse (fiftyList myList3) True 0
+      print  $ fortyNineList $ checkAndRecurse (fiftyList myList4) True 0
+      print  $ fortyNineList $ checkAndRecurse (fiftyList myList5) True 0
+      print  $ fortyNineList $ checkAndRecurse (fiftyList myList6) True 0
+      print  $ fortyNineList $ checkAndRecurse (fiftyList unSolve) True 0
 
---badList is the same as goodList, but the first index is 1 instead of 5, rendering the entire lotus invalid
-badList::[Int]
-badList = [1,4,7,2,1,6,3,6,5,4,3,7,2,1,7,3,6,2,1,5,4,2,1,7,5,4,6,3,1,5,4,3,6,7,2,7,6,2,1,3,5,4,3,5,4,7,2,1,6] 
+fiftyList::[Int] -> [Int]
+fiftyList a = a ++ [0]
 
------------------------------------------------------------------------------------------------------------
---End static declarations
------------------------------------------------------------------------------------------------------------
-
-main = putStrLn $ show goodList
+fortyNineList::[Int] -> [Int]
+fortyNineList a = take 49 a
 
 lotusSolver::[Int] -> [Int]
 lotusSolver bigList = bigList
 
---addToList places a new value "value" at the index "index" of the list "bigList", and returns the new list
 addToList::[Int] -> Int -> Int -> [Int]
 addToList bigList index value
  |(bigList!!index)/=0 = bigList
- |otherwise = buildList bigList (-1) index value
- 
---buildList is used by addToList to construct the new list.
---It copies all values of the original list until it reaches the desired index, at which it adds the new value.
---It then copies all remaining values of the original list
-buildList::[Int] -> Int -> Int -> Int -> [Int]
-buildList bigList loopIndex index value
- | loopIndex==49 = []
- | loopIndex==(-1) = buildList bigList 0 index value
- | loopIndex==index = value:(buildList bigList (loopIndex+1) index value)
- | otherwise = (bigList!!loopIndex):(buildList bigList (loopIndex+1) index value)
+ |otherwise = ((take index bigList) ++ [value] ++ (drop (index+1) bigList))
+
+--take index ++ value ++ drop index;
+
 
 checkAndRecurse::[Int] -> Bool -> Int -> [Int]
 checkAndRecurse bigList valid index
- | index==49 = bigList
- | valid == False = [0]
- | (checkAndRecurse (listToCheck 1) (check(listToCheck 1)) (index+1)) /= [0] = checkAndRecurse (listToCheck 1) (check(listToCheck 1)) (index+1)
- | (checkAndRecurse (listToCheck 2) (check(listToCheck 2)) (index+1)) /= [0] = checkAndRecurse (listToCheck 2) (check(listToCheck 2)) (index+1)
- | (checkAndRecurse (listToCheck 3) (check(listToCheck 3)) (index+1)) /= [0] = checkAndRecurse (listToCheck 3) (check(listToCheck 3)) (index+1)
- | (checkAndRecurse (listToCheck 4) (check(listToCheck 4)) (index+1)) /= [0] = checkAndRecurse (listToCheck 4) (check(listToCheck 4)) (index+1)
- | (checkAndRecurse (listToCheck 5) (check(listToCheck 5)) (index+1)) /= [0] = checkAndRecurse (listToCheck 5) (check(listToCheck 5)) (index+1)
- | (checkAndRecurse (listToCheck 6) (check(listToCheck 6)) (index+1)) /= [0] = checkAndRecurse (listToCheck 6) (check(listToCheck 6)) (index+1)
- | (checkAndRecurse (listToCheck 7) (check(listToCheck 7)) (index+1)) /= [0] = checkAndRecurse (listToCheck 7) (check(listToCheck 7)) (index+1)
- | otherwise = [0]
+ | index== 50 = bigList
+ | bigList!!index /= 0 = checkAndRecurse bigList valid (index + 1)
+ | valid == False = []
+ | a1 /= [] = a1
+ | a2 /= [] = a2
+ | a3 /= [] = a3
+ | a4 /= [] = a4
+ | a5 /= [] = a5
+ | a6 /= [] = a6
+ | a7 /= [] = a7
+ | otherwise = []
  where listToCheck = (addToList bigList index)
+       a1 = (checkAndRecurse (listToCheck 1) (check(listToCheck 1)) (index+1))
+       a2 = (checkAndRecurse (listToCheck 2) (check(listToCheck 2)) (index+1))
+       a3 = (checkAndRecurse (listToCheck 3) (check(listToCheck 3)) (index+1))
+       a4 = (checkAndRecurse (listToCheck 4) (check(listToCheck 4)) (index+1))
+       a5 = (checkAndRecurse (listToCheck 5) (check(listToCheck 5)) (index+1))
+       a6 = (checkAndRecurse (listToCheck 6) (check(listToCheck 6)) (index+1))
+       a7 = (checkAndRecurse (listToCheck 7) (check(listToCheck 7)) (index+1))
 
---check is used to verify the ENTIRE lotus
+
 check::[Int] -> Bool
-check list = (checkRing list) && (checkCCW list) && (checkCW list)
-
---checkRing verifies that all rings are legal
-checkRing::[Int] -> Bool
-checkRing list = (compareValues list ring0) && (compareValues list ring1) && (compareValues list ring2) && (compareValues list ring3) && (compareValues list ring4) && (compareValues list ring5) && (compareValues list ring6)
-
---checkCCW verifies that all CCW spirals are legal
-checkCCW::[Int] -> Bool
-checkCCW list = (compareValues list ccw_spiral0) && (compareValues list ccw_spiral1) && (compareValues list ccw_spiral2) && (compareValues list ccw_spiral3) && (compareValues list ccw_spiral4) && (compareValues list ccw_spiral5) && (compareValues list ccw_spiral6)
-
---checkCW verifies that all CW sprials are legal
-checkCW::[Int] -> Bool
-checkCW list = (compareValues list cw_spiral0) && (compareValues list cw_spiral1) && (compareValues list cw_spiral2) && (compareValues list cw_spiral3) && (compareValues list cw_spiral4) && (compareValues list cw_spiral5) && (compareValues list cw_spiral6)
-
---compareValues checks if the values of "list" at the indices contained in "indices" span 1 through 7.
---Hence, a lotus with any zeros will return as false.
---compareValues does NOT check if two values are equal.
-compareValues::[Int] -> [Int] -> Bool
-compareValues list indices = sort partialList == [1,2,3,4,5,6,7]
- where partialList = (list!!(indices!!0)):(list!!(indices!!1)):(list!!(indices!!2)):(list!!(indices!!3)):(list!!(indices!!4)):(list!!(indices!!5)):(list!!(indices!!6)):[]
-
---checkPartial takes in a lotus "list" and a ring/spiral of that lotus called "partial"
---It checks whether that partial is valid and returns that Bool
-checkPartial::[Int] -> [Int] -> Bool
-checkPartial list partial = (compareValues list partial)
+check a
+  | (hasDuplicate [a!!x | x <-row0] || hasDuplicate [a!!x | x <-row1] || hasDuplicate [a!!x | x <-row2] || hasDuplicate [a!!x | x <-row3] || hasDuplicate [a!!x | x <-row4] || hasDuplicate [a!!x | x <-row5] || hasDuplicate [a!!x | x <-row6]) == True = False
+  | (hasDuplicate [a!!x | x <-cw0] || hasDuplicate [a!!x | x <-cw1] || hasDuplicate [a!!x | x <-cw2] || hasDuplicate [a!!x | x <-cw3] || hasDuplicate [a!!x | x <-cw4] || hasDuplicate [a!!x | x <-cw5] || hasDuplicate [a!!x | x <-cw6]) == True = False
+  | (hasDuplicate [a!!x | x <-ccw0] || hasDuplicate [a!!x | x <-ccw1] || hasDuplicate [a!!x | x <-ccw2] || hasDuplicate [a!!x | x <-ccw3] || hasDuplicate [a!!x | x <-ccw4] || hasDuplicate [a!!x | x <-ccw5] || hasDuplicate [a!!x | x <-ccw6]) == True = False
+  | otherwise = True
 
 
+
+hasDuplicate::[Int] -> Bool
+hasDuplicate [] = False
+hasDuplicate (x:xs)
+  |x == 0 = hasDuplicate xs
+  |otherwise = (elem x xs ) || hasDuplicate xs
