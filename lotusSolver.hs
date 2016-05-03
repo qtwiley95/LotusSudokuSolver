@@ -31,11 +31,9 @@ cw4 = [46,39,33,26,20,13,0]
 cw5 = [47,40,34,27,14,7,1]
 cw6 = [48,41,28,21,15,8,2]
 
-rows = row0 ++ row1 ++ row2 ++ row3 ++ row4 ++ row5 ++ row6
-cws = cw0 ++ cw1 ++ cw2 ++ cw3 ++ cw4 ++ cw5 ++ cw6
-ccws = ccw0 ++ ccw1 ++ ccw2 ++ ccw3 ++ ccw4 ++ ccw5 ++ ccw6
---solved [5,4,7,2,1,6,3,6,5,4,3,7,2,1,7,3,6,2,1,5,4,2,1,7,5,4,6,3,1,5,4,3,6,7,2,7,6,2,1,3,5,4,3,5,4,7,2,1,6]
---
+-----------------------------------------------------------------------------------
+--Begin Test Cases
+-----------------------------------------------------------------------------------
 allZero = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 myList0 = [5,0,0,0,1,6,0,0,0,0,3,0,0,0,7,0,6,2,1,0,0,0,1,7,0,0,6,0,0,5,0,3,6,7,2,0,0,2,1,0,0,4,0,0,4,0,0,1,0]
 myList1 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0]
@@ -45,9 +43,12 @@ myList4 = [4,0,5,3,0,1,7,1,7,0,0,0,0,0,0,0,6,0,0,5,2,1,2,3,0,0,0,5,6,0,7,4,0,1,3
 myList5 = [0,1,2,0,6,0,0,0,0,7,1,0,0,0,0,0,6,0,0,0,0,1,0,0,0,0,0,0,6,0,0,0,0,2,0,2,3,0,0,6,0,0,1,4,0,0,0,0,0]
 myList6 = [0,0,0,7,6,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0]
 unSolve = [0,0,3,7,6,1,4,4,0,5,1,7,0,0,0,2,6,0,4,5,3,1,0,0,2,0,0,5,6,0,7,0,0,2,3,2,3,0,7,6,0,0,0,4,5,6,1,7,0]
+-----------------------------------------------------------------------------------
+--End Test Cases
+-----------------------------------------------------------------------------------
 main = do
-      print  (fortyNineList (checkAndRecurse (fiftyList allZero) True 0))
-      print  (fortyNineList (checkAndRecurse (fiftyList myList0) True 0))
+      print  $ fortyNineList $ checkAndRecurse (fiftyList allZero) True 0
+      print  $ fortyNineList $ checkAndRecurse (fiftyList myList0) True 0
       print  $ fortyNineList $ checkAndRecurse (fiftyList myList1) True 0
       print  $ fortyNineList $ checkAndRecurse (fiftyList myList2) True 0
       print  $ fortyNineList $ checkAndRecurse (fiftyList myList3) True 0
@@ -56,26 +57,43 @@ main = do
       print  $ fortyNineList $ checkAndRecurse (fiftyList myList6) True 0
       print  $ fortyNineList $ checkAndRecurse (fiftyList unSolve) True 0
 
+-----------------------------------------------------------------------------------
+--fiftyList takes in a list of size forty nine and adds a zero element to the end.
+--This is valuable because checkAndRecurse validates entry N when it is called on entry N+1
+-----------------------------------------------------------------------------------
 fiftyList::[Int] -> [Int]
 fiftyList a = a ++ [0]
 
+-----------------------------------------------------------------------------------
+--fortyNineList drops the final element from the fiftyList.
+--The final element is always 1, and is meaningless to the lotus.
+--We drop it before we return the lotus.
+-----------------------------------------------------------------------------------
 fortyNineList::[Int] -> [Int]
 fortyNineList a = take 49 a
 
+-----------------------------------------------------------------------------------
+--lotusSolver is the entry point of the lotus solving functionality
+-----------------------------------------------------------------------------------
 lotusSolver::[Int] -> [Int]
-lotusSolver bigList = bigList
+lotusSolver bigList = fortyNineList $ checkAndRecurse (fiftyList bigList) True 0
 
+-----------------------------------------------------------------------------------
+--addToList creates a new list, which is copy of bigList,
+--except the value placed at "index" is "value" 
+-----------------------------------------------------------------------------------
 addToList::[Int] -> Int -> Int -> [Int]
 addToList bigList index value
  |(bigList!!index)/=0 = bigList
  |otherwise = ((take index bigList) ++ [value] ++ (drop (index+1) bigList))
 
---take index ++ value ++ drop index;
-
-
+-----------------------------------------------------------------------------------
+--This is the main working function of the lotus solver.
+--
+-----------------------------------------------------------------------------------
 checkAndRecurse::[Int] -> Bool -> Int -> [Int]
 checkAndRecurse bigList valid index
- | index== 50 = bigList
+ | index== 50 = bigList --The base recursive case is
  | bigList!!index /= 0 = checkAndRecurse bigList valid (index + 1)
  | valid == False = []
  | a1 /= [] = a1
@@ -95,7 +113,9 @@ checkAndRecurse bigList valid index
        a6 = (checkAndRecurse (listToCheck 6) (check(listToCheck 6)) (index+1))
        a7 = (checkAndRecurse (listToCheck 7) (check(listToCheck 7)) (index+1))
 
-
+-----------------------------------------------------------------------------------
+--check validates the entire lotus by check all rows, then all spirals
+-----------------------------------------------------------------------------------
 check::[Int] -> Bool
 check a
   | (hasDuplicate [a!!x | x <-row0] || hasDuplicate [a!!x | x <-row1] || hasDuplicate [a!!x | x <-row2] || hasDuplicate [a!!x | x <-row3] || hasDuplicate [a!!x | x <-row4] || hasDuplicate [a!!x | x <-row5] || hasDuplicate [a!!x | x <-row6]) == True = False
@@ -103,8 +123,9 @@ check a
   | (hasDuplicate [a!!x | x <-ccw0] || hasDuplicate [a!!x | x <-ccw1] || hasDuplicate [a!!x | x <-ccw2] || hasDuplicate [a!!x | x <-ccw3] || hasDuplicate [a!!x | x <-ccw4] || hasDuplicate [a!!x | x <-ccw5] || hasDuplicate [a!!x | x <-ccw6]) == True = False
   | otherwise = True
 
-
-
+-----------------------------------------------------------------------------------
+--hasDuplicate checks if a number appears twice in the input list
+-----------------------------------------------------------------------------------
 hasDuplicate::[Int] -> Bool
 hasDuplicate [] = False
 hasDuplicate (x:xs)
