@@ -44,17 +44,18 @@ unSolve = [0,0,3,7,6,1,4,4,0,5,1,7,0,0,0,2,6,0,4,5,3,1,0,0,2,0,0,5,6,0,7,0,0,2,3
 -----------------------------------------------------------------------------------
 --End Test Cases
 -----------------------------------------------------------------------------------
+{- commenting out our main since it was our testing conditions and thought it would conflict with you testing our program.
 main = do
-      print  $ fortyNineList $ checkAndRecurse (fiftyList allZero) True 0
-      print  $ fortyNineList $ checkAndRecurse (fiftyList myList0) True 0
-      print  $ fortyNineList $ checkAndRecurse (fiftyList myList1) True 0
-      print  $ fortyNineList $ checkAndRecurse (fiftyList myList2) True 0
-      print  $ fortyNineList $ checkAndRecurse (fiftyList myList3) True 0
-      print  $ fortyNineList $ checkAndRecurse (fiftyList myList4) True 0
-      print  $ fortyNineList $ checkAndRecurse (fiftyList myList5) True 0
-      print  $ fortyNineList $ checkAndRecurse (fiftyList myList6) True 0
-      print  $ fortyNineList $ checkAndRecurse (fiftyList unSolve) True 0
-
+      print  $ lotusSolver allZero
+      print  $ lotusSolver myList0
+      print  $ lotusSolver myList1
+      print  $ lotusSolver myList2
+      print  $ lotusSolver myList3
+      print  $ lotusSolver myList4
+      print  $ lotusSolver myList5
+      print  $ lotusSolver myList6
+      print  $ lotusSolver unSolve
+-}
 -----------------------------------------------------------------------------------
 --Name: fiftyList
 --Inputs: list of ints
@@ -119,7 +120,7 @@ checkAndRecurse bigList valid index
  | a5 /= [] = a5
  | a6 /= [] = a6
  | a7 /= [] = a7
- | otherwise = []--will return to previous call if unable to add any value into the List 
+ | otherwise = []--will return to previous call if unable to add any value into the List
  where listToCheck = (addToList bigList index)--setting these conditions to where GREEAAAATLLLY improves evaluation time via lazy evaluation
        a1 = (checkAndRecurse (listToCheck 1) (check(listToCheck 1)) (index+1))
        a2 = (checkAndRecurse (listToCheck 2) (check(listToCheck 2)) (index+1))
@@ -133,7 +134,7 @@ checkAndRecurse bigList valid index
 --Name:check
 --Inputs: list of Ints
 --Outputs: boolean
---Explanation: using list comprehension to check every value that corresponds to the index that occurs in any of 
+--Explanation: using list comprehension to check every value that corresponds to the index that occurs in any of
 --             the statically determined rows, ccws, and cws. then calls hasDuplicate on each of the returned lists made by
 --             the list comprehension methods. since we're using boolean logic, if any of the hasDuplicates return True then
 --             the whole line is true and the function returns False. otherwise they all pass and return True
@@ -148,9 +149,9 @@ check a
 -----------------------------------------------------------------------------------
 --Name: hasDuplicate
 --Inputs: A list of Ints
---Outputs: boolean 
---Explanation: until the passed in list is empty take the head of the list and if it is not equivalent to 0 then using 
---             elem function to check if the head of list matches any other element inside of the list or if the next 
+--Outputs: boolean
+--Explanation: until the passed in list is empty take the head of the list and if it is not equivalent to 0 then using
+--             elem function to check if the head of list matches any other element inside of the list or if the next
 --             head of list matches any subsequent recursively calls until list is empty, if none matched then returns
 --             false. if any matched then return true.
 -----------------------------------------------------------------------------------
