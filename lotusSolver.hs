@@ -1,8 +1,6 @@
 --Precode
 import Data.List.Split
 import Data.List
-import Data.Char
-import Data.String
 
 --Rings of like shape, outside to inside
 row0 = [0,1,2,3,4,5,6]
