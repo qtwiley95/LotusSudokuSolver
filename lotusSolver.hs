@@ -2,7 +2,7 @@
 import Data.List.Split
 import Data.List
 
---Rows of like shape, outside to inside
+--rows of like shape, outside to inside
 row0 = [0,1,2,3,4,5,6]
 row1 = [7,8,9,10,11,12,13]
 row2 = [14,15,16,17,18,19,20]
@@ -77,18 +77,20 @@ fortyNineList a = take 49 a
 
 -----------------------------------------------------------------------------------
 --Name: lotusSolver
---Inputs: a list of ints, representing an unsolved lotus
---Outputs: a lis
---Explanation:
+--Inputs: a list of ints, representing an unsolved lotus sudoku puzzle
+--Outputs: a list of ints, representing a now solved lotus sudoku puzzle
+--Explanation: We append a trivial element before solving, and
+--			   drop that same element before returning
 -----------------------------------------------------------------------------------
 lotusSolver::[Int] -> [Int]
 lotusSolver bigList = fortyNineList $ checkAndRecurse (fiftyList bigList) True 0
 
 -----------------------------------------------------------------------------------
---Name:
---Inputs:
---Outputs:
---Explanation:
+--Name: addToList
+--Inputs: a list of ints; an index int; a value int
+--Outputs: a list of ints
+--Explanation: The output list is identical to the input list,
+--             except that "value" is placed at "index."
 -----------------------------------------------------------------------------------
 addToList::[Int] -> Int -> Int -> [Int]
 addToList bigList index value
@@ -96,10 +98,11 @@ addToList bigList index value
  |otherwise = ((take index bigList) ++ [value] ++ (drop (index+1) bigList))
 
 -----------------------------------------------------------------------------------
---Name:
---Inputs:
---Outputs:
---Explanation:
+--Name: checkAndRecurse
+--Inputs: a list of ints; a bool called "valid"; an int called "index
+--Outputs: a list of ints 
+--Explanation: the output is either a solved lotus,
+--             or an empty list, meaning the lotus given was unsolvable.
 -----------------------------------------------------------------------------------
 checkAndRecurse::[Int] -> Bool -> Int -> [Int]
 checkAndRecurse bigList valid index
