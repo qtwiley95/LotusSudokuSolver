@@ -100,15 +100,18 @@ addToList bigList index value
 -----------------------------------------------------------------------------------
 --Name: checkAndRecurse
 --Inputs: a list of ints; a bool called "valid"; an int called "index
---Outputs: a list of ints 
---Explanation: the output is either a solved lotus,
---             or an empty list, meaning the lotus given was unsolvable.
+--Outputs: the output is either a solved lotus, or an empty list, meaning the lotus given was unsolvable.
+--Explanation: This is the Top Level function in our code. This function will attempt to add a value to the list. then calls itself
+--             onto the remainder of the list keeping track by incrementing an index counter for its next call. By using where statement
+--             each recursive call to check its valid option of number to add will only be evaluated to work if it needs to be evaluated
+--             Either index will hit 50 and it will return the completed solved list. or every option will be exhausted and its initial call
+--             will reach the otherwise condition and return an empty list thus noting that the puzzle is unsolveable.
 -----------------------------------------------------------------------------------
 checkAndRecurse::[Int] -> Bool -> Int -> [Int]
 checkAndRecurse bigList valid index
- | index== 50 = bigList --The base recursive case is
- | bigList!!index /= 0 = checkAndRecurse bigList valid (index + 1)
- | valid == False = []
+ | index== 50 = bigList --The base recursive case is when index hits 50
+ | bigList!!index /= 0 = checkAndRecurse bigList valid (index + 1) --if the value at index is not = 0 skip over it
+ | valid == False = [] --if it failed check on call return its fail condition (empty list)
  | a1 /= [] = a1
  | a2 /= [] = a2
  | a3 /= [] = a3
@@ -116,8 +119,8 @@ checkAndRecurse bigList valid index
  | a5 /= [] = a5
  | a6 /= [] = a6
  | a7 /= [] = a7
- | otherwise = []
- where listToCheck = (addToList bigList index)
+ | otherwise = []--will return to previous call if unable to add any value into the List 
+ where listToCheck = (addToList bigList index)--setting these conditions to where GREEAAAATLLLY improves evaluation time via lazy evaluation
        a1 = (checkAndRecurse (listToCheck 1) (check(listToCheck 1)) (index+1))
        a2 = (checkAndRecurse (listToCheck 2) (check(listToCheck 2)) (index+1))
        a3 = (checkAndRecurse (listToCheck 3) (check(listToCheck 3)) (index+1))
