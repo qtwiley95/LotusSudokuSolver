@@ -56,29 +56,39 @@ main = do
       print  $ fortyNineList $ checkAndRecurse (fiftyList unSolve) True 0
 
 -----------------------------------------------------------------------------------
---fiftyList takes in a list of size forty nine and adds a zero element to the end.
+--Name: fiftyList
+--Inputs: list of ints
+--Outputs: list of ints of size one greater than the input list
+--Explanation: Takes in a list and adds a zero element to the end.
 --This is valuable because checkAndRecurse validates entry N when it is called on entry N+1
 -----------------------------------------------------------------------------------
 fiftyList::[Int] -> [Int]
 fiftyList a = a ++ [0]
 
 -----------------------------------------------------------------------------------
---fortyNineList drops the final element from the fiftyList.
---The final element is always 1, and is meaningless to the lotus.
+--Name: fortyNineList
+--Inputs: list of ints
+--Outputs: list of ints of size one less than the input list
+--Explanation: The final element is always 1, and is meaningless to the lotus.
 --We drop it before we return the lotus.
 -----------------------------------------------------------------------------------
 fortyNineList::[Int] -> [Int]
 fortyNineList a = take 49 a
 
 -----------------------------------------------------------------------------------
---lotusSolver is the entry point of the lotus solving functionality
+--Name: lotusSolver
+--Inputs: a list of ints, representing an unsolved lotus
+--Outputs: a lis
+--Explanation:
 -----------------------------------------------------------------------------------
 lotusSolver::[Int] -> [Int]
 lotusSolver bigList = fortyNineList $ checkAndRecurse (fiftyList bigList) True 0
 
 -----------------------------------------------------------------------------------
---addToList creates a new list, which is copy of bigList,
---except the value placed at "index" is "value" 
+--Name:
+--Inputs:
+--Outputs:
+--Explanation:
 -----------------------------------------------------------------------------------
 addToList::[Int] -> Int -> Int -> [Int]
 addToList bigList index value
@@ -86,8 +96,10 @@ addToList bigList index value
  |otherwise = ((take index bigList) ++ [value] ++ (drop (index+1) bigList))
 
 -----------------------------------------------------------------------------------
---This is the main working function of the lotus solver.
---
+--Name:
+--Inputs:
+--Outputs:
+--Explanation:
 -----------------------------------------------------------------------------------
 checkAndRecurse::[Int] -> Bool -> Int -> [Int]
 checkAndRecurse bigList valid index
@@ -112,7 +124,10 @@ checkAndRecurse bigList valid index
        a7 = (checkAndRecurse (listToCheck 7) (check(listToCheck 7)) (index+1))
 
 -----------------------------------------------------------------------------------
---check validates the entire lotus by check all rows, then all spirals
+--Name:
+--Inputs:
+--Outputs:
+--Explanation:
 -----------------------------------------------------------------------------------
 check::[Int] -> Bool
 check a
@@ -122,7 +137,10 @@ check a
   | otherwise = True
 
 -----------------------------------------------------------------------------------
---hasDuplicate checks if a number appears twice in the input list
+--Name:
+--Inputs:
+--Outputs:
+--Explanation:
 -----------------------------------------------------------------------------------
 hasDuplicate::[Int] -> Bool
 hasDuplicate [] = False
