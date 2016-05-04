@@ -1,3 +1,4 @@
+--Authors Quinton Wiley & Michael Neises
 --Precode
 import Data.List.Split
 import Data.List
